@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Instagram Picker</title>
+	<!-- icon -->
+	<link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
+	<!-- main.css -->
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body class="limiter">
+	<!-- 背景彩色圖 -->
+	<!-- <div id="container" style="background-image: url('images/bg-01.jpg');" class="container-login100"> -->
+	<!-- 背景藏青藍 -->
+	<div class="container-login100">
+		<!-- index1第一頁 -->
+		<div class="cheatForm" id="cheatFormDiv">
+			<div class="instaQueryForm">
+				<table id="cheatTable" class="table table-striped table-hover table-bordered instaQueryForm">
+					<br>
+					<div style="font-size: 20px;font-weight: 800; text-align: center;">Instagram Picker</div>
+					<br>
+					<div style="font-size: 20px;font-weight: 800; text-align: center;">內定人選 (超過留空)</div>
+					<br>
+					<thead>
+						<tr>
+							<td class="col-xs-4"><label for="">獎品(需與抽獎表單字相同)</label></td>
+							<td class="col-xs-4"><label for="">內定人帳號(帳號不包含@)</label></td>
+							<td class="col-xs-2">
+								<button class="index2Btn" onclick="addCheat()">增加</button>
+							</td>
+						</tr>
+					</thead>
+					<tbody id="tb2">
+						<tr id="index1_1st" class="index1_1st">
+							<td class="col-xs-4">
+								<input class="form-control input-sm" type="text" id="cheat_reward" value='' />
+							</td>
+							<td class="col-xs-4">
+								<input class="form-control input-sm" type="text" id="cheat_name" value='' />
+							</td>
+							<td class="col-xs-2"></td>
+						</tr>
+						<tr id="index1_2st" class="index1_1st">
+							<td class="col-xs-4">
+								<input class="form-control input-sm" type="text" id="cheat_reward" value='' />
+							</td>
+							<td class="col-xs-4">
+								<input class="form-control input-sm" type="text" id="cheat_name" value='' />
+							</td>
+							<td class="col-xs-2">
+								<button class='index2Btn' onclick='delCheat(this)'>刪除</button>
+							</td>
+						</tr>
+						<tr id="index1_3st" class="index1_1st">
+							<td class="col-xs-4">
+								<input class="form-control input-sm" type="text" id="cheat_reward" value='' />
+							</td>
+							<td class="col-xs-4">
+								<input class="form-control input-sm" type="text" id="cheat_name" value='' />
+							</td>
+							<td class="col-xs-2">
+								<button class='index2Btn' onclick='delCheat(this)'>刪除</button>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="1"></td>
+							<td colspan="2">
+								<!-- login100-form-bgbtn 在main.css 有彩色跟藏青藍樣式 -->
+								<div class="container-login100-form-btn">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+										<button id="set_cheat_btn" onclick="setCheat()" class="login100-form-btn">
+											送出內定名單
+										</button>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- index2 顯示view Div -->
+		<div id="div0" style="display: none;">
+			<div class="cheatForm" id="index2Contain">
+				<div class="instaQueryForm">
+					<br>
+					<div style="font-size: 20px;font-weight: 800; text-align: center;">Instagram Picker</div>
+					<br>
+					<form class="instaQueryForm" id="queryFrom">
+						<div class="col-12 mt-2 mb-2">
+							<div class="row">
+								<div class="col-12 col-lg-3">
+									<div class="row">
+										<label for="" class="font-weight-bolder">貼文網址：</label>
+									</div>
+								</div>
+								<div class="col-12 col-lg-8">
+									<input class="form-control input-sm" id="url"
+										placeholder="ex. https://www.instagram.com/p/B-ZEuJypDtG/" />
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="col-12 mt-4 mb-2">
+							<div class="row">
+								<div class="col-12 col-lg-3">
+									<div class="row">
+										<label for="" class="font-weight-bolder">可以重複留言：</label>
+									</div>
+								</div>
+								<div class="col-12 col-lg-8">
+									<input id="repeat" type="checkbox" />
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="col-12 mt-4 mb-2">
+							<div class="row">
+								<div class="col-12 col-lg-3">
+									<div class="row">
+										<label for="" class="font-weight-bolder">標記人數：</label>
+									</div>
+								</div>
+								<div class="col-12 col-lg-3">
+									<select class="form-control input-sm selectpicker" id="tagCount">
+										<option>0</option>
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</form>
+					<br><br>
+					<table id="queryTable2" border="1"
+						class="table table-striped table-hover table-bordered instaQueryForm">
+						<thead>
+							<tr>
+								<td class="col-xs-5"><label for="">獎品</label></td>
+								<td class="col-xs-2"><label for="">抽獎人數</label></td>
+								<td class="col-xs-2">
+									<button onclick="addPrize()" class="index2Btn">
+										增加
+									</button>
+								</td>
+							</tr>
+						</thead>
+						<tbody id="tb">
+							<tr id="index2_1st">
+								<td class="col-xs-5">
+									<input class="form-control input-sm" id="reward" />
+								</td>
+								<td class="col-xs-2">
+									<select class="form-control input-sm selectpicker" id="count">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+									</select>
+								</td>
+								<td class="col-xs-2">
+									<!-- <button onclick="delPrize(this)" class="index2Btn">
+											刪除
+										</button> -->
+								</td>
+							</tr>
+						</tbody>
+
+						<tfoot>
+							<tr>
+								<td colspan="1"></td>
+								<td colspan="2">
+									<!-- login100-form-bgbtn 在main.css 有彩色跟藏青藍樣式 -->
+									<div class="container-login100-form-btn">
+										<div class="wrap-login100-form-btn">
+											<div class="login100-form-bgbtn"></div>
+											<button id="btn1" onclick="sendFun()" class="login100-form-btn">
+												抽獎！
+											</button>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+
+			</div>
+			<div id="picking"
+				style="position: absolute;left: 50%;top: 50%; margin-top: -100px;margin-left: -200px; height: 400px;width:600px ;"
+				hidden="true">
+				<p style="font-size: 100px;font-weight: 500;color: white;" id="pickingText">抽獎中</p>
+			</div>
+		</div>
+		<!-- reuslt 顯示view Div -->
+		<div id="div1"></div>
+	</div>
+</body>
+<script>
+	var cheatList = new Array();
+
+	// 設定內定人選
+	function setCheat() {
+		document.getElementById("cheatTable").style.display = 'none';
+
+		var tab = document.getElementById("tb2");
+		var rows = tab.rows;
+		for (var i = 0; i < rows.length - 1; i++) {
+			var reward = rows[i].cells[0].children[0].value.trim();
+			var name = rows[i].cells[1].children[0].value.trim();
+			var cheatData = {
+				CHEAT_REWARD: reward,
+				CHEAT_NAME: name
+			}
+			if (reward.length != 0 && name.length != 0) {
+				cheatList.push(cheatData);
+			}
+		}
+
+		alert("內定人員設定完畢！");
+		$("#cheatFormDiv").hide();
+		$('#div0').show();
+
+		// var request = $.ajax({
+		// 	type: "POST",
+		// 	url: "/cheat",
+		// 	data: "",
+		// 	contentType: "application/json; charset=UTF-8",
+		// 	async: false, // 設定同步 預設true 非同步 防止alert前就先跳頁
+		// 	success: function (data) {
+		// 		alert("內定人員設定完畢！");
+		// 		$("#cheatFormDiv").hide();
+		// 		$('#div0').show();
+		// 		// $("#div0").html(data);
+		// 	},
+		// 	error: function (data) {
+		// 		alert("error");
+		// 	}
+		// });
+	}
+
+	// 增加內定人員
+	function addCheat() {
+		var trObj = document.createElement("tr");
+		trObj.setAttribute('class', 'index1_1st');
+		trObj.id = new Date().getTime();
+		trObj.innerHTML =
+			"<td class='col-xs-4'><input class='form-control input-sm' type='text' id='cheat_reward' value='' /></td>"
+			+ "<td class='col-xs-4'><input class='form-control input-sm' type='text' id='cheat_name' value='' /></td>"
+			+ "<td class='col-xs-2'><button class='index2Btn' onclick='delCheat(this)'>刪除</button></td>";
+		document.getElementById("tb2").appendChild(trObj);
+		var cheatFormDiv = document.getElementById("cheatFormDiv");
+		var cheatTableDivStyle = window.getComputedStyle(cheatFormDiv);
+		var cheatTableDivStyleHeight = cheatTableDivStyle.getPropertyValue('height').replace('px', '');
+		var numOfTr = document.getElementById('tb2').getElementsByTagName('tr').length;
+		var tdHeight = $('.index1_1st').height(); // 一列高度
+		if (numOfTr > 3) {
+			cheatFormDiv.style.height = (Number(cheatTableDivStyleHeight) + tdHeight).toString() + 'px';
+		}
+	}
+
+	// 刪除內定人員
+	function delCheat(obj) {
+		var trId = obj.parentNode.parentNode.id;
+		var trObj = document.getElementById(trId);
+		var cheatFormDiv = document.getElementById("cheatFormDiv");
+		var cheatTableDivStyle = window.getComputedStyle(cheatFormDiv);
+		var cheatTableDivStyleHeight = cheatTableDivStyle.getPropertyValue('height').replace('px', '');
+		var numOfTr = document.getElementById('tb2').getElementsByTagName('tr').length;
+		var tdHeight = $('.index1_1st').height(); // 一列高度
+		if (numOfTr > 3) {
+			cheatFormDiv.style.height = (Number(cheatTableDivStyleHeight) - tdHeight).toString() + 'px';
+		}
+		document.getElementById("tb2").removeChild(trObj);
+	}
+
+	// 增加獎品欄位
+	function addPrize() {
+		var trObj = document.createElement("tr");
+		trObj.id = new Date().getTime();
+		trObj.innerHTML =
+			"<td class='col-xs-5'><input class='form-control input-sm' id='reward' value=''/></td>"
+			+ "<td class='col-xs-2'><select class='form-control input-sm selectpicker' id='count'>"
+			+ "<option>1</option>"
+			+ "<option>2</option>"
+			+ "<option>3</option>"
+			+ "<option>4</option>"
+			+ "<option>5</option>"
+			+ "<option>6</option>"
+			+ "<option>7</option>"
+			+ "<option>8</option>"
+			+ "<option>9</option>"
+			+ "<option>10</option>"
+			+ "</select></td>"
+			+ "<td class='col-xs-2'><button onclick='delPrize(this)' class='index2Btn'>刪除</button></td>";
+		document.getElementById("tb").appendChild(trObj);
+		var index2Contain = document.getElementById("index2Contain");
+		var index2ContainStyle = window.getComputedStyle(index2Contain);
+		var heightOfindex2ContainStyle = index2ContainStyle.getPropertyValue('height').replace('px', '');
+		var tdHeight = $('#index2_1st').height(); // 一列高度
+		index2Contain.style.height = (Number(heightOfindex2ContainStyle) + tdHeight).toString() + 'px';
+	}
+
+	// 刪除當前獎品欄位
+	function delPrize(obj) {
+		var trId = obj.parentNode.parentNode.id;
+		var trObj = document.getElementById(trId);
+		document.getElementById("tb").removeChild(trObj);
+
+		var index2Contain = document.getElementById("index2Contain");
+		var index2ContainStyle = window.getComputedStyle(index2Contain);
+		var heightOfindex2ContainStyle = index2ContainStyle.getPropertyValue('height').replace('px', '');
+		var tdHeight = $('#index2_1st').height(); // 一列高度
+		index2Contain.style.height = (Number(heightOfindex2ContainStyle) - tdHeight).toString() + 'px';
+	}
+
+	function getRewards() {
+		var rewards = new Array();
+		var tab = document.getElementById("tb");
+		var rows = tab.rows;
+		alert("獎項共: " + rows.length);
+		for (var i = 0; i < rows.length; i++) {
+			var rewardData = {
+				REWARD: rows[i].cells[0].children[0].value,
+				COUNT: rows[i].cells[1].children[0].value
+			}
+			rewards.push(rewardData);
+		}
+		return rewards;
+	}
+
+	// 送出 抽獎
+	function sendFun() {
+		var url = document.getElementById("url").value;
+		var tag = document.getElementById("tagCount").value;
+		//var keyword = document.getElementById("keyword").value;
+		if (url.length == 0) {
+			alert("請輸入網址喔！");
+		} else {
+			var keyword = "";
+			var repeat = document.getElementById("repeat").checked ? "1"
+				: "0";
+			var rewards = getRewards();
+
+			var data = {
+				URL: url,
+				TAG: tag,
+				KEYWORD: keyword,
+				REPEAT: repeat,
+				REWARDS: rewards,
+				CHEAT_LIST: cheatList
+			};
+
+			var request = $.ajax({
+				type: "POST",
+				url: "/send",
+				data: JSON.stringify(data),
+				contentType: "application/json; charset=UTF-8",
+			}).done(function (data) {
+				// $("#div0").attr("hidden", true);
+				$("#div0").hide();
+				$("#div1").html(data);
+				settingResultPageHeight();
+			}).fail(function () {
+				alert("中獎人不重複時，獎項多於中獎人數！");
+				location.reload();
+			});
+			// .always(function () {
+			//   alert("complete");
+			// });
+			var index2Contain = document.getElementById("index2Contain");
+			index2Contain.hidden = true;
+			var picking = document.getElementById("picking");
+			picking.hidden = false;
+			this.setIntervalTimer();
+		}
+	}
+
+	function setIntervalTimer() {
+		var i = 0;
+		setInterval(() => {
+			if (i === 0) {
+				document.getElementById('pickingText').innerHTML = '抽獎中';
+				i++;
+			} else if (i === 1) {
+				document.getElementById('pickingText').innerHTML = '抽獎中.';
+				i++;
+			} else if (i === 2) {
+				document.getElementById('pickingText').innerHTML = '抽獎中..';
+				i++;
+			} else if (i === 3) {
+				document.getElementById('pickingText').innerHTML = '抽獎中...';
+				i = 0;
+			}
+		}, 750);
+	}
+
+	function settingResultPageHeight() {
+		var picking = document.getElementById("picking");
+		picking.hidden = true;
+		var numOfTr = document.getElementById('result_tbody').getElementsByTagName('tr').length;
+		var tr_height = $('#ctr1').height();
+		console.log("行高", tr_height);
+		var resultContain_height = $('#resultContain').height();
+		// tbody行數 > 7  動態增加resultContain高度 
+		if (numOfTr > 7) {
+			$('#resultContain').height(resultContain_height + ((numOfTr - 7) * tr_height));
+		}
+	}
+
+</script>
+
+</html>
